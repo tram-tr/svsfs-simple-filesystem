@@ -57,6 +57,44 @@ SVSFS needs to build the free block bitmap at mount time. Each time that an Simp
 SimpleFS looks much like the Unix inode layer. Each "file" is identified by an integer called an "inumber". The inumber is simply an index into the array of inode structures that starts in block 1. When a file is created, SimpleFS chooses the first available inumber and returns it to the user. All further references to that file are made using the inumber. Using SimpleFS as a foundation, you could easily add another layer of software that implements file and directory names. However, that will not be part of this assignment.
 
 
-## Interface
+## Shell Interface 
 
+To compile:
 
+> <samp>make</samp>
+
+> <samp>./svsfs <filename> <number-of-blocks></samp>
+  
+For example, to start with a fresh new disk image:
+  
+> <samp>./svsfs mydisk 200</samp>
+  
+Once the shell starts, you can use the "help" command to list the available commands:
+
+> <samp>svsfs> help</samp>
+
+> <samp>Commands are:</samp>
+
+> <samp>format</samp>
+
+> <samp>mount</samp> 
+  
+> <samp>debug</samp> 
+
+> <samp>create</samp> 
+
+> <samp>delete <inode></samp> 
+
+> <samp>cat <inode></samp> 
+
+> <samp>copyin <file> <inode></samp> 
+
+> <samp>copyout <inode> <file></samp> 
+
+> <samp>help</samp> 
+  
+> <samp>quit</samp> 
+
+> <samp>exit
+
+  
