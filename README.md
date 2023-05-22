@@ -6,7 +6,7 @@ This is Project 6 of [CSE-34341-SVS-Spring-2023](https://github.com/patrick-flyn
 
 * Tram Trinh (htrinh@nd.edu)
 
-# Project Goals
+## Project Goals
 
 The goals of this project are:
 
@@ -14,7 +14,7 @@ The goals of this project are:
 - Learn about filesystem recovery by implementing a free block bitmap scan.
 - Develop expertise in C programming by using structures and unions extensively.
 
-# SVSFS Overview
+## SVSFS Overview
 
 The SVSFS system has three major components: the shell, the filesystem itself, and the emulated disk. The following figure shows how the components relate to each other: 
 
@@ -22,13 +22,13 @@ The SVSFS system has three major components: the shell, the filesystem itself, a
 
 At the top level, a user gives typed commands to a shell, instructing it to format or mount a disk, and to copy data in and out of the filesystem. The shell converts these typed commands into high-level operations on the filesystem, such as fs_format(), fs_mount(), fs_read(), and fs_write(). The filesystem is responsible for accepting these operations on files and converting them into simple block read and write operations on the emulated disk, called disk_read() and disk_write(). The emulated disk, in turn, stores all of its data in an image file in the filesystem.
 
-# SVSFS Filesystem Design
+## SVSFS Filesystem Design
 
 SVSFS has the following layout on disk. It assumes that disk blocks are the common size of 4KB. The first block of the disk is a "superblock" that describes the layout of the rest of the filesystem. A certain number of blocks following the superblock contain inode data structures. Typically, ten percent of the total number of disk blocks are used as inode blocks. The remaining blocks in the filesystem are used as plain data blocks, and occasionally as indirect pointer blocks. Here is a picture of a very small SVSFS image:
 
 ![image](https://github.com/tram-tr/svsfs-simple-filesystem/assets/97485876/8e9f70eb-795b-41ae-97f7-eba27cdea43b)
 
-## The superblock
+### The superblock
 
 The superblock contains four 32-bit unsigned integer fields and describes the layout of the rest of the filesystem:
 
@@ -39,7 +39,7 @@ The first field is always the "magic" number FS_MAGIC (0x34341023). The format r
 
 The remaining fields in the superblock describe the layout of the filesystem. nblocks is the total number of blocks, which should be the same as the number of blocks on the disk (thus, a disk may be no larger than 2^32 blocks, or 2^44 bytes – hopefully 16 TB is enough space for us...). ninodeblocks is the number of blocks set aside for storing inodes. ninodes is the total number of inodes in those blocks. The format routine is responsible for choosing ninodeblocks: this should always be 10 percent of nblocks, rounding up. Note that the superblock data structure is quite small: only 16 bytes. The remainder of disk block zero is left unused.
 
-## The inode
+### The inode
 
 Each inode looks like this:
 
@@ -56,5 +56,7 @@ SVSFS needs to build the free block bitmap at mount time. Each time that an Simp
 
 SimpleFS looks much like the Unix inode layer. Each "file" is identified by an integer called an "inumber". The inumber is simply an index into the array of inode structures that starts in block 1. When a file is created, SimpleFS chooses the first available inumber and returns it to the user. All further references to that file are made using the inumber. Using SimpleFS as a foundation, you could easily add another layer of software that implements file and directory names. However, that will not be part of this assignment.
 
+
+## Interface
 
 
