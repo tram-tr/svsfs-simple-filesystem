@@ -63,7 +63,7 @@ To compile:
 
 > <samp>make</samp>
 
-> <samp>./svsfs <filename> <number-of-blocks></samp>
+> <samp>./svsfs <\filename>\ <\number-of-blocks>\</samp>
   
 For example, to start with a fresh new disk image:
   
