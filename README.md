@@ -63,7 +63,7 @@ To compile:
 
 > <samp>make</samp>
 
-> <samp>./svsfs <\filename>\ <\number-of-blocks>\</samp>
+> <samp>./svsfs \<filename\> \<number-of-blocks\></samp>
   
 For example, to start with a fresh new disk image:
   
@@ -83,13 +83,13 @@ Once the shell starts, you can use the "help" command to list the available comm
 
 > <samp>create</samp> 
 
-> <samp>delete <inode></samp> 
+> <samp>delete \<inode\></samp> 
 
-> <samp>cat <inode></samp> 
+> <samp>cat \<inode\></samp> 
 
-> <samp>copyin <file> <inode></samp> 
+> <samp>copyin \<file\> \<inode\></samp> 
 
-> <samp>copyout <inode> <file></samp> 
+> <samp>copyout \<inode\> \<file\></samp> 
 
 > <samp>help</samp> 
   
