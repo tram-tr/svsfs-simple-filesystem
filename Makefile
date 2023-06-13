@@ -1,14 +1,18 @@
-svsfs: shell.o fs.o disk.o
-	gcc shell.o fs.o disk.o -o svsfs
+CC = gcc
+CFLAGS = -Wall -g
+OBJ_DIR = obj
 
-shell.o: shell.c
-	gcc -Wall shell.c -c -o shell.o -g
+svsfs: $(OBJ_DIR)/shell.o $(OBJ_DIR)/fs.o $(OBJ_DIR)/disk.o
+	$(CC) $(OBJ_DIR)/shell.o $(OBJ_DIR)/fs.o $(OBJ_DIR)/disk.o -o svsfs
 
-fs.o: fs.c fs.h
-	gcc -Wall fs.c -c -o fs.o -g
+$(OBJ_DIR)/shell.o: src/shell.c
+	$(CC) $(CFLAGS) -c src/shell.c -o $(OBJ_DIR)/shell.o
 
-disk.o: disk.c disk.h
-	gcc -Wall disk.c -c -o disk.o -g
+$(OBJ_DIR)/fs.o: src/fs.c include/fs.h
+	$(CC) $(CFLAGS) -c src/fs.c -o $(OBJ_DIR)/fs.o
+
+$(OBJ_DIR)/disk.o: src/disk.c include/disk.h
+	$(CC) $(CFLAGS) -c src/disk.c -o $(OBJ_DIR)/disk.o
 
 clean:
-	rm -f svsfs disk.o fs.o shell.o
+	rm -f svsfs $(OBJ_DIR)/*.o
